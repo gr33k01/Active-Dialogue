@@ -48,3 +48,9 @@ Styling can be changed but should at least include:
 ```javascript
 activeDialogue.init();
 ```
+
+* You can also open dialogue boxes by passing an ID into the open method.
+
+```javascript
+activeDialogue.open('myDialogueBox');
+```
