@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Active-Dialogue Demo</title>
+	<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+	<link href="../css/activeDialogue.css" rel="stylesheet" type="text/css" />
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="../activeDialogue.js"></script>
+	<style>
+		body{
+			padding-top:100px;
+			color:#333;
+			font-family: 'Arial', sans-serif;
+		}
+		a{
+			color:#389adc;
+		}
+		.container{
+			display:block;
+			max-width:85%;
+			width:300px;
+			margin:0 auto;
+			border:1px solid #ddd;
+			border-radius:3px;
+			padding:20px;
+		}
+		.modal-next, .modal-prev{
+			padding:10px 20px;
+			border:1px solid #ddd;
+			border-radius:3px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+
+		<h3>Active-Dialogue Demo</h3>
+		<p>Click on a link to open a dialogue box.</p>
+		<a data-fire="myDialogueBox1">Launch Dialogue Box 1</a>	<br /> <br />
+		<a data-fire="myDialogueBox2">Launch Dialogue Box 2</a>	<br /> <br />
+		<a data-fire="myDialogueBox3">Launch Dialogue Box 3</a>	<br /> <br />
+
+		<div class="modal" id="myDialogueBox1">
+		  <div class="modal-box">
+		  	<h3>Dialogue Box 1</h3>
+		  	<p>Andouille cow shoulder hamburger prosciutto, leberkas pork loin beef ribs t-bone. Venison landjaeger pig turducken doner sausage, biltong shoulder pork chop pastrami turkey bacon chuck drumstick shankle. Filet mignon ham hock andouille swine, salami biltong corned beef chicken pancetta cow flank rump. Ham hock shank kielbasa pig drumstick doner. Pork belly capicola pastrami spare ribs jerky chuck andouille brisket short ribs porchetta ball tip.</p>
+		    <div class="navigation">
+		      <a class="modal-next">Next</a>
+		      <a class="modal-prev">Prev</a>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal" id="myDialogueBox2">
+		  <div class="modal-box">
+		  	<h3>Dialogue Box 2</h3>
+		  	<p>MSalami hamburger chicken, ground round pork meatloaf ham hock drumstick short loin beef ribs spare ribs doner. Cow pancetta sirloin, frankfurter pig brisket tail kevin boudin meatloaf bresaola andouille spare ribs pork loin tenderloin. Bacon turkey pork loin chicken. Pork belly capicola venison strip steak flank pork loin chicken ham hock brisket sausage beef. Strip steak hamburger kevin, pork loin pork chop flank short ribs pork belly spare ribs ham beef ribs salami meatball frankfurter. Hamburger andouille frankfurter pastrami, porchetta salami flank ground round leberkas tenderloin filet mignon ham hock kielbasa ball tip. Pancetta tail shank landjaeger pork belly corned beef rump turducken.</p>
+		    <div class="navigation">
+		      <a class="modal-next">Next</a>
+		      <a class="modal-prev">Prev</a>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal" id="myDialogueBox3">
+		  <div class="modal-box">
+			<h3>Dialogue Box 3</h3>
+			<p>Duis dolor dolore ut aliquip kielbasa. Reprehenderit aliquip enim exercitation est t-bone nostrud capicola id dolor ground round. Ribeye pariatur bresaola, consequat consectetur flank labore in tongue hamburger salami brisket fatback ad. Tongue in magna shank, porchetta pariatur excepteur id occaecat kevin. Pork chop dolor shank ut. Commodo ground round pork loin fugiat nostrud reprehenderit ham hock turkey sunt tempor ea aliquip minim.</p>
+		    <div class="navigation">
+		      <a class="modal-next">Next</a>
+		      <a class="modal-prev">Prev</a>
+		    </div>
+		  </div>
+		</div>
+	</div>
+<script>
+	activeDialogue.init();
+</script>
+</body>
+</html>

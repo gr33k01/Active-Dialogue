@@ -19,7 +19,7 @@ body.active-modal{
 }
 .modal-box{
   width:600px;
-  max-width:100%;
+  max-width:85%;
   display:block;
   margin:30px auto;
   background:#fff;
