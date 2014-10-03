@@ -10,7 +10,11 @@ var activeDialogue = {
         prevButtonSelector: '.modal-prev',
     },
 
+    // Consistent element order
     collection: [],
+    
+    // Prevent click + drag off modal closure.
+    mouseDownHere: false,
 
     init: function(config) {
         // Allow overriding the default settings
@@ -34,7 +38,8 @@ var activeDialogue = {
         activeDialogue.collection = elements;
 
         $(fireElement).on('click', activeDialogue.fire);
-        $(close).on('click', activeDialogue.close);
+        $(close).on('mousedown', activeDialogue.close);
+        $(close).on('mouseup', activeDialogue.close);
         $(nextBtn).on('click', activeDialogue.next);
         $(prevBtn).on('click', activeDialogue.previous);
     },
@@ -55,12 +60,27 @@ var activeDialogue = {
         // Allow only one active modal
         $(activeDialogue.config.modalSelector).css('display', 'none');
         $('#' + id).css('display', 'initial');
+        $('body').addClass('active-modal');
     },
 
     close: function(e) {
+      
         // Return if child of selector is clicked
-        if (e.target !== this) return;
-
+        if (e.target !== this) {
+          
+          // Prevent click + drag off modal closure.
+          activeDialogue.config.mouseDownHere = false; 
+          return;
+        }
+      
+        // Prevent click + drag off modal closure.
+        if(!activeDialogue.config.mouseDownHere){
+           activeDialogue.config.mouseDownHere = true;
+           return;
+        }
+      
+        activeDialogue.config.mouseDownHere = false;
+      
         $(activeDialogue.config.modalSelector).css('display', 'none');
         $('body').removeClass('active-modal');
     },
