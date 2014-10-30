@@ -49,11 +49,12 @@ var activeDialogue = {
         $(activeDialogue.config.modalSelector).css('display', 'none');
 
         $('.modal').each(function() {
-            if (activeTarget.currentTarget.dataset['fire'] != this.id) return false;
-            $(this).css('display', 'initial');
+            if (activeTarget.currentTarget.dataset['fire'] == this.id){
+              $(this).css('display', 'initial');
+              $('body').addClass('active-modal');
+              return false;
+            }
         });
-
-        $('body').addClass('active-modal');
     },
 
     open: function(id) {
