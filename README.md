@@ -1,6 +1,6 @@
 # Active-Dialogue
 
-A simple, modular script for launching and cycling though modal content windows
+A simple, modular script for launching and cycling though modal content windows.
 
 ## Requirements
 
@@ -24,14 +24,16 @@ A simple, modular script for launching and cycling though modal content windows
 
 ## CSS
 
-Styling can be changed but should at least include: 
+Styling is mostly defered to your CSS but should at least include: 
 
 ```css
-.modal{
-  display:none;
+.modal {
+  display: none;
   position: fixed;
 }
 ```
+
+However, I recommend hooking up ```activeDialogue.css```.
 
 ## Getting started
 
@@ -49,7 +51,7 @@ Styling can be changed but should at least include:
 activeDialogue.init();
 ```
 
-* You can also open dialogue boxes by passing an ID into the open method.
+* You can also open dialogue boxes by passing an ID to the open method.
 
 ```javascript
 activeDialogue.open('myDialogueBox');
