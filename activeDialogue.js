@@ -1,4 +1,5 @@
 /* v1.2 by @gr33k01 */
+
 var activeDialogue = {
 
     config: {
@@ -9,7 +10,11 @@ var activeDialogue = {
         prevButtonSelector: '.modal-prev',
     },
 
+    // Consistent element order
     collection: [],
+    
+    // Prevent click + drag off modal closure.
+    mouseDownHere: false,
 
     init: function(config) {
         // Allow overriding the default settings
@@ -33,7 +38,9 @@ var activeDialogue = {
         activeDialogue.collection = elements;
 
         $(fireElement).on('click', activeDialogue.fire);
-        $(close).on('click', activeDialogue.close);
+    
+        $(close).on('mousedown', activeDialogue.close);
+        $(close).on('mouseup', activeDialogue.close);
         $(nextBtn).on('click', activeDialogue.next);
         $(prevBtn).on('click', activeDialogue.previous);
     },
@@ -47,6 +54,7 @@ var activeDialogue = {
                 $(this).css('display', 'block');
                 $('body').addClass('active-modal');
                 return false;
+           
             }
         });
     },
@@ -60,21 +68,33 @@ var activeDialogue = {
 
     close: function(e) {
         // Return if child of selector is clicked
-        if (e.target !== this) return;
-
+        if (e.target !== this) {
+          
+          // Prevent click + drag off modal closure.
+          activeDialogue.config.mouseDownHere = false; 
+          return;
+        }
+      
+        // Prevent click + drag off modal closure.
+        if(!activeDialogue.config.mouseDownHere){
+           activeDialogue.config.mouseDownHere = true;
+           return;
+        }
+      
+        activeDialogue.config.mouseDownHere = false;
+      
         $(activeDialogue.config.modalSelector).css('display', 'none');
         $('body').removeClass('active-modal');
     },
 
     next: function(e) {
         var index = activeDialogue.collection.indexOf($(this).closest('.modal')[0]) + 1;
-
+        
         if (index >= activeDialogue.collection.length) index = 0;
         activeDialogue.open(activeDialogue.collection[index].id);
     },
 
     previous: function(e) {
-
         var index = activeDialogue.collection.indexOf($(this).closest('.modal')[0]) - 1;
 
         if (index < 0) index = activeDialogue.collection.length - 1;
