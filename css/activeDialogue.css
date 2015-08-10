@@ -1,41 +1,48 @@
-body.active-modal{
-  /* Disables body scrolling when a dialogue box is open */
-  overflow:hidden;
+/* v1.2 by @gr33k01 */
+.active-modal {
+    overflow: hidden;
 }
-.modal-box:before, .modal-box:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
-.modal-box:after { clear: both; }
-.modal{
-  display:none;
-  position: fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-  z-index:1050;
-  outline: 0;
-  overflow-y:scroll;
-  background: rgba(0, 0, 0, .2);
-  zoom: 1;
+.modal-box:before,
+.modal-box:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
 }
-.modal-box{
-  width:600px;
-  max-width:100%;
-  display:block;
-  margin:30px auto;
-  background:#fff;
-  padding:10px 20px;
-  border-radius:5px;
-  clear:both;
+.modal-box:after {
+    clear: both;
 }
-.modal .navigation{
-  display:block;
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    outline: 0;
+    overflow-y: scroll;
+    background: rgba(0, 0, 0, .2);
+    zoom: 1;
 }
-.modal-next{
-  float:right;
+.modal-box {
+    width: 600px;
+    max-width: 100%;
+    display: block;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    clear: both;
 }
-.modal-prev{
-  float:left;
+.modal-next {
+    float: right;
 }
-a[data-fire], .modal-next, .modal-prev{
-  cursor:pointer;
+.modal-prev {
+    float: left;
+}
+[data-fire],
+.modal-next,
+.modal-prev {
+    cursor: pointer;
 }

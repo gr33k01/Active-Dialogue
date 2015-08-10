@@ -1,11 +1,10 @@
-/*! v1 by @gr33k01 */
-
+/* v1.2 by @gr33k01 */
 var activeDialogue = {
 
     config: {
         modalSelector: '.modal',
-        fireElement: 'a[data-fire]',
-        closeElement: '.modal',
+        fireElement: '[data-fire]',
+        closeElement: '.modal, .close-modal',
         nextButtonSelector: '.modal-next',
         prevButtonSelector: '.modal-prev',
     },
@@ -13,85 +12,70 @@ var activeDialogue = {
     collection: [],
 
     init: function(config) {
-
         // Allow overriding the default settings
         $.extend(activeDialogue.config, config);
 
-        var modalSelector = activeDialogue.config.modalSelector;
-        var fireElement = activeDialogue.config.fireElement;
-        var close = activeDialogue.config.closeElement;
-        var nextBtn = activeDialogue.config.nextButtonSelector;
-        var prevBtn = activeDialogue.config.prevButtonSelector;
+        var modalSelector = activeDialogue.config.modalSelector,
+            fireElement = activeDialogue.config.fireElement,
+            close = activeDialogue.config.closeElement,
+            nextBtn = activeDialogue.config.nextButtonSelector,
+            prevBtn = activeDialogue.config.prevButtonSelector;
 
         // Collection of dialogue  elements
         var elements = (function() {
-            var a = new Array();
+            var a = [];
             $(modalSelector).each(function() {
                 a.push(this);
             });
             return a;
-        })();
+        }());
 
         activeDialogue.collection = elements;
 
         $(fireElement).on('click', activeDialogue.fire);
         $(close).on('click', activeDialogue.close);
-        $(nextBtn).on('click', activeDialogue.nextD);
-        $(prevBtn).on('click', activeDialogue.prevD);
+        $(nextBtn).on('click', activeDialogue.next);
+        $(prevBtn).on('click', activeDialogue.previous);
     },
 
     fire: function(activeTarget) {
-
-        console.log('Fire' + activeTarget[0]);
+        // Allow only one active modal
+        $(activeDialogue.config.modalSelector).css('display', 'none');
 
         $('.modal').each(function() {
-            if (activeTarget.currentTarget.dataset['fire'] == this.id) {
-                $(this).css({
-                    'display': 'initial'
-                });
+            if ($(activeTarget.currentTarget).data('fire') == this.id) {
+                $(this).css('display', 'block');
+                $('body').addClass('active-modal');
+                return false;
             }
         });
-
-        $('body').addClass('active-modal');
     },
 
     open: function(id) {
-
-        openThis = '#' + id;
-
         // Allow only one active modal
-        $(activeDialogue.config.modalSelector).css({
-            'display': 'none'
-        });
-
-        $(openThis).css({
-            'display': 'initial'
-        });
+        $(activeDialogue.config.modalSelector).css('display', 'none');
+        $('#' + id).css('display', 'block');
+        $('body').addClass('active-modal');
     },
 
     close: function(e) {
-
         // Return if child of selector is clicked
         if (e.target !== this) return;
 
-        $(this).css({
-            'display': 'none'
-        });
-
+        $(activeDialogue.config.modalSelector).css('display', 'none');
         $('body').removeClass('active-modal');
     },
 
-    nextD: function(e) {
-
-        var index = activeDialogue.collection.indexOf(e['currentTarget']['offsetParent']) + 1;
+    next: function(e) {
+        var index = activeDialogue.collection.indexOf($(this).closest('.modal')[0]) + 1;
 
         if (index >= activeDialogue.collection.length) index = 0;
         activeDialogue.open(activeDialogue.collection[index].id);
     },
 
-    prevD: function(e) {
+    previous: function(e) {
 
-        var index = activeDialogue.collection.indexOf(e['currentTarget']['offsetParent']) - 1;
+        var index = activeDialogue.collection.indexOf($(this).closest('.modal')[0]) - 1;
 
         if (index < 0) index = activeDialogue.collection.length - 1;
         activeDialogue.open(activeDialogue.collection[index].id);
